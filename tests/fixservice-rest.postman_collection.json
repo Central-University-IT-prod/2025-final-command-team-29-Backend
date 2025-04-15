@@ -1,0 +1,1902 @@
+{
+	"info": {
+		"_postman_id": "9b5e9811-118b-47d9-a39d-e23895176c59",
+		"name": "service-rest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33018952",
+		"_collection_link": "https://www.postman.com/zentas/workspace/prod-fineal-25/collection/33018952-9b5e9811-118b-47d9-a39d-e23895176c59?action=share&source=collection_link&creator=33018952"
+	},
+	"item": [
+		{
+			"name": "auth-client",
+			"item": [
+				{
+					"name": "Sign-up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save the value of the 'token' field from the response in the environment variable 'partnerAuth'",
+									"pm.test(\"Save the value of the 'token' field in the environment variable 'partnerAuth'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"userAuth\", jsonData.token);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"User\",\n  \"phone_number\": \"+79000000000\",\n  \"password\": \"user\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/clients/auth/sign-up",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"clients",
+								"auth",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign-in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save the value of the 'token' field from the response in the environment variable 'partnerAuth'",
+									"pm.test(\"Save the value of the 'token' field in the environment variable 'partnerAuth'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"userAuth\", jsonData.token);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phone_number\": \"+79000000000\",\n  \"password\": \"user\"\n\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/clients/auth/sign-in",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"clients",
+								"auth",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth-partner",
+			"item": [
+				{
+					"name": "Sign-up",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save the value of the 'token' field from the response in the environment variable 'partnerAuth'",
+									"pm.test(\"Save the value of the 'token' field in the environment variable 'partnerAuth'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"partnerAuth\", jsonData.token);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Шаурмечаня на Беларусской 21\",\n  \"description\": \"тттттттттттт\",\n  \"phone_number\": \"+79000003002\",\n  \"password\": \"user\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/partners/auth/sign-up",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners",
+								"auth",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign-in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save the value of the 'token' field from the response in the environment variable 'partnerAuth'",
+									"pm.test(\"Save the value of the 'token' field in the environment variable 'partnerAuth'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"partnerAuth\", jsonData.token);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phone_number\": \"+79000003002\",\n  \"password\": \"user\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/partners/auth/sign-in",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners",
+								"auth",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "partners",
+			"item": [
+				{
+					"name": "Get Partners",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/partners?page=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "promo-partners",
+			"item": [
+				{
+					"name": "Get Promos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partnerAuth}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/partners/:partnerID/promos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners",
+								":partnerID",
+								"promos"
+							],
+							"variable": [
+								{
+									"key": "partnerID",
+									"value": "7c1c4395-c497-4881-98ac-e49c66f475e2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Promo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/partners/:partnerID/promos/:promoID",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners",
+								":partnerID",
+								"promos",
+								":promoID"
+							],
+							"variable": [
+								{
+									"key": "partnerID",
+									"value": ""
+								},
+								{
+									"key": "promoID",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{partnerAuth}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "promos",
+			"item": [
+				{
+					"name": "img",
+					"item": [
+						{
+							"name": "Upload",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "postman-cloud:///1eeffc8c-d859-4590-acfd-3983c66e9a28"
+										},
+										{
+											"key": "file",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/promos/9d7cb2c4-7c8e-4c54-9643-a421abafd52a/img/upload",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"promos",
+										"9d7cb2c4-7c8e-4c54-9643-a421abafd52a",
+										"img",
+										"upload"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "postman-cloud:///1eeffb8a-9ad3-4430-bfe4-a3ca39cf31dc"
+										},
+										{
+											"key": "file",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/i/7c1c4395-c497-4881-98ac-e49c66f475e2/promos/9d7cb2c4-7c8e-4c54-9643-a421abafd52a/img",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"i",
+										"7c1c4395-c497-4881-98ac-e49c66f475e2",
+										"promos",
+										"9d7cb2c4-7c8e-4c54-9643-a421abafd52a",
+										"img"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create promo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partnerAuth}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Test Promo 323\",\n  \"description\": \"This is a test promo description\",\n  \"condition\": {\n    \"type\": \"COMMON\",\n    \"buy\": 2\n  },\n  \"time_limit_start\": 1735689600,\n  \"time_limit_end\": 1767225600,\n  \"usage_limit\": 100,\n  \"condition_string\": \"Buy 2, get 1 free\",\n  \"is_active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/promos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"promos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Promo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{vault:authorization-secret}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/promos/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"promos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "d49beb13-c82a-4821-9259-be78e88ec466"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActivePromo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partnerAuth}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"client_id\": \"6b9788e2-3100-43fa-bde9-d0555974f7b1\",\n  \"promo_id\": \"5591e5da-f3f5-4944-8aca-d5a2a2dfb7d6\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/promos/activate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"promos",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{partnerAuth}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "stats",
+			"item": [
+				{
+					"name": "GetStat",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partnerAuth}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/partners/03a44ca0-7926-4220-bd67-51404e883f9b/stat",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners",
+								"03a44ca0-7926-4220-bd67-51404e883f9b",
+								"stat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetStat Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partnerAuth}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/partners/d71c89b7-6c41-4952-96bc-02c60c5ef577/stat/export",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners",
+								"d71c89b7-6c41-4952-96bc-02c60c5ef577",
+								"stat",
+								"export"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Group",
+			"item": [
+				{
+					"name": "01 ping",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ping",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "02 Sign-up User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save the value of the 'token' field from the response in the environment variable 'partnerAuth'",
+									"pm.test(\"Save the value of the 'token' field in the environment variable 'partnerAuth'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"userAuth\", jsonData.token);",
+									"});",
+									"// Save the value of the 'token' field from the response in the environment variable 'partnerAuth'",
+									"pm.test(\"Save the value of the 'token' field in the environment variable 'partnerAuth'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"client1_id\", jsonData.id);",
+									"});",
+									"",
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"User1\",\n  \"phone_number\": \"+79000000005\",\n  \"password\": \"user\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/clients/auth/sign-up",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"clients",
+								"auth",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 Sign-in user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save the value of the 'token' field from the response in the environment variable 'partnerAuth'",
+									"pm.test(\"Save the value of the 'token' field in the environment variable 'partnerAuth'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"client1\", jsonData.token);",
+									"});",
+									"pm.test(\"Save the value of the 'token' field in the environment variable 'partnerAuth'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"client1_id\", jsonData.id);",
+									"});",
+									"",
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phone_number\": \"+79000000005\",\n  \"password\": \"user\"\n\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/clients/auth/sign-in",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"clients",
+								"auth",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 Sign-up Partner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save the value of the 'token' field from the response in the environment variable 'partnerAuth'",
+									"pm.test(\"Save the value of the 'token' field in the environment variable 'partnerAuth'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"partner1\", jsonData.token);",
+									"",
+									"});",
+									"pm.test(\"Save the value of the 'token' field in the environment variable 'partnerAuth'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"partner1-id\", jsonData.id);",
+									"",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Шаурмечаня на Беларусской 123\",\n  \"description\": \"тттттттттттт\",\n  \"phone_number\": \"+79000000005\",\n  \"password\": \"user\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/partners/auth/sign-up",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners",
+								"auth",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "05 Sign-in Partner",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"phone_number\": \"+79000000005\",\n  \"password\": \"user\"\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/partners/auth/sign-in",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners",
+								"auth",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "06 Sign-up Partner2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Шаурмечаня на вднх 21\",\n  \"description\": \"тттттттттттт\",\n  \"phone_number\": \"+79000000001\",\n  \"password\": \"user\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/partners/auth/sign-up",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners",
+								"auth",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 get-partners",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/partners?page=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 Create promo 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save the value of the 'token' field from the response in the environment variable 'partnerAuth'",
+									"pm.test(\"Save the value of the 'token' field in the environment variable 'partnerAuth'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"promo1\", jsonData.promo_id);",
+									"",
+									"});",
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(201);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partner1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Common Promo 101\",\n  \"description\": \"Buy 3, get 1 free\",\n  \"condition\": {\n    \"type\": \"COMMON\",\n    \"buy\": 3\n  },\n  \"time_limit_start\": 1735689600,\n  \"time_limit_end\": 1767225600,\n  \"usage_limit\": 50,\n  \"condition_string\": \"Buy 3, get 1 free\",\n  \"is_active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/promos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"promos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "09 Create promo 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save the value of the 'token' field from the response in the environment variable 'partnerAuth'",
+									"pm.test(\"Save the value of the 'token' field in the environment variable 'partnerAuth'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"promo2\", jsonData.promo_id);",
+									"",
+									"});",
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(400);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partner1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Unique Promo 202\",\n  \"description\": \"Limited time unique offer\",\n  \"condition\": {\n    \"type\": \"UNIQUE\",\n    \"buy\": 5\n  },\n  \"time_limit_start\": 1735689600,\n  \"time_limit_end\": 1767225600,\n  \"usage_limit\": 10,\n  \"condition_string\": \"Buy 5, get special discount\",\n  \"is_active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/promos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"promos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10 Create promo3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Save the value of the 'token' field from the response in the environment variable 'partnerAuth'",
+									"pm.test(\"Save the value of the 'token' field in the environment variable 'partnerAuth'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"promo3\", jsonData.promo_id);",
+									"",
+									"});",
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(201);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partner1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Bundle Promo 303\",\n  \"description\": \"Bundle deal for 2 items\",\n  \"condition\": {\n    \"type\": \"BUNDLE\",\n    \"buy\": 2\n  },\n  \"time_limit_start\": 1735689600,\n  \"time_limit_end\": 1767225600,\n  \"usage_limit\": 30,\n  \"condition_string\": \"Buy 2, get special price\",\n  \"is_active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/promos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"promos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "11 get promos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partner1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/partners/:partnerID/promos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners",
+								":partnerID",
+								"promos"
+							],
+							"variable": [
+								{
+									"key": "partnerID",
+									"value": "{{partner1-id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "12 Get Promo Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partner1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/partners/:partnerID/promos/:promoID",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners",
+								":partnerID",
+								"promos",
+								":promoID"
+							],
+							"variable": [
+								{
+									"key": "partnerID",
+									"value": "{{partner1-id}}"
+								},
+								{
+									"key": "promoID",
+									"value": "{{promo3}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "13 Upload Image",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "postman-cloud:///1eeffc8c-d859-4590-acfd-3983c66e9a28"
+								},
+								{
+									"key": "file",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/promos/:promoID/img/upload",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"promos",
+								":promoID",
+								"img",
+								"upload"
+							],
+							"variable": [
+								{
+									"key": "promoID",
+									"value": "{{promo1}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "14 Get Image",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "postman-cloud:///1eeffb8a-9ad3-4430-bfe4-a3ca39cf31dc"
+								},
+								{
+									"key": "file",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/partners/:partnerID/promos/:promoID/img",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners",
+								":partnerID",
+								"promos",
+								":promoID",
+								"img"
+							],
+							"variable": [
+								{
+									"key": "partnerID",
+									"value": "{{partner1-id}}"
+								},
+								{
+									"key": "promoID",
+									"value": "{{promo1}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "15 Delete Promo Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(204);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partner1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/promos/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"promos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{promo3}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "16 ActivePromo Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(204);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partner1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"client_id\": \"{{client1_id}}\",\n  \"promo_id\": \"{{promo1}}\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/promos/activate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"promos",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "17 GetStats",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partner1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/partners/:partnerID/stat",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners",
+								":partnerID",
+								"stat"
+							],
+							"variable": [
+								{
+									"key": "partnerID",
+									"value": "{{partner1-id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "18 Export StatsXLSX",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{partner1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/partners/:partnerID/stat/export",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"partners",
+								":partnerID",
+								"stat",
+								"export"
+							],
+							"variable": [
+								{
+									"key": "partnerID",
+									"value": "{{partner1-id}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "18 Export StatsXLSX",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/partners/:partnerID/stat/export",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"partners",
+										":partnerID",
+										"stat",
+										"export"
+									],
+									"variable": [
+										{
+											"key": "partnerID",
+											"value": "{{partner1-id}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "xml",
+							"header": [
+								{
+									"key": "Accept-Ranges",
+									"value": "bytes"
+								},
+								{
+									"key": "Content-Disposition",
+									"value": "attachment; filename=\"partner_stats.xlsx\""
+								},
+								{
+									"key": "Content-Length",
+									"value": "6162"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+								},
+								{
+									"key": "Last-Modified",
+									"value": "Tue, 04 Mar 2025 04:55:13 GMT"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 04 Mar 2025 04:55:13 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0018\u0000\u0000\u0000xl/worksheets/sheet1.xml���Λ0\u0010��}\nk���6i\u001aَ�\u0012����\u000e\f�\n���<~E.�D,��ȟ��|\u0006���\\�ye\r�t�\u0000AS�J�#����k؊w����\u001b�@��5�C\u0013B��ԗ\rj�\u0017�Cs�mm���/�;R�9��mI�4K�\u0015�R\u0019�'l�[2l]�\u0012s[�5�p\u000fq�ʠ���<\bV)�f�O\u001c�\u001cv)\bF�C�n\r�)�}4� \u000f���2`�!�3\u0002\u0019\u001c\u000f֞\u0006���\fA�F\n<?��[՟�TX�s\u001b~��;�c\u00138��q�y뱔� \u0005s�'��P�\u001c�]\n$p\u0018�.\"a�\"\u0018-\u001f�K��)�\u001a�l��}��}�>NY\u0011��}��jd��~��F�,���E*f�\u0017�l�\u0019���}6�,E���Ea��\u0015h���׋�\u0001\u0000\u0000��PK\u0007\b%�w\u0018Q\u0001\u0000\u0000(\u0003\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u000f\u0000\u0000\u0000xl/workbook.xml��Oo�0\f���\u0014\u0002 \t��r�a\u001b��\u0010`]{V$:&�?�$7η\u001flϫ�^zz2e��\u001eU>�βW���� V\u001c\u0018z\u001d\f���?O?\u001e��X})o!^�!\\Y�O\u0012���CQ$ݠSi\u0015Z���u�N�\n�R�6�2�A��\u0016k�w�S�a\"\u001c�g\u0018��I㷠;�>O��Ve\n>5Ԧ���gpN�k�>��Z��L��}�\u0002s�p��\u0010�٢�^lgr/�\u001fЎt\f)�y���g�C^�\u000b!��UY���i�L��/�)\u0016�U)7��H�\u0001���\n�k�vd�\u0004�٬9Te�`U���\u0014YM6c\n<EzU�.!�\u000e�\u0019�Ug�S�nn� v\u001b.��zk��A�\to�:|����\t7\t\u001c�}q���\u00172�\u0019���v��D�4Y\u000b��2લX\f\u001a�5+��Z~g�)e�\t�X?\u000e��\u0003\u0019\t�hF��ͬ�*���\u0014� ����z�8],\\T\u0003\u0000\u0000��PK\u0007\b1\u000b\\]�\u0001\u0000\u0000�\u0002\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013\u0000\u0000\u0000xl/theme/theme1.xml��o�6\u0014���+\b�W�?d�A�\"��vk�\u0016Mڡ�g���P�@�I|\u001b��.\u0003\u0006t�.\u0003v�a\u0018V`\u0005V�?&@���#\u0006�HL�\u0012\u0013�.V\fM\u000e���y��\u001e)�X�~�4a�HE\u0005�q뚋\u0011�\b)�|��p��\u0006����u��1I\b:M\u0018W���X�t�qT\u0010�\u0004�5�\u0012~����\thuM��\t%�P\u001e%�i�n�I�r\\��*��Ni@F\"�%��$\f4\u0015\\�4U\u0018qH�����0\u0013��Υ�2�q*\u001b\b�<\br�&�ۆG�쏚�!��\u0018��O(\u000f��!9�\u00181PzȤ���\u0007o]w΍��\u0012g����a���x(��{����E��u{�%QL�A�E�Ud������\"�-\u0004\u0001�V\u0013�v\u0006;#o\u00153�˚�����jB���\u0015t��~���\u0002�����p�\u001c+hw�z5U����&�[��\u0015��n���&4��\u0019�G+���:Ú\"]XO\u0005�UK\u000e���^%\u0017�c���\u0015�M�=��B�\u0005���\u0001M9��L! >\u001e\u0002�\u0013I�\u001e�b�Q\n\\(�c��ݎ����UY��A所ᦘ#�?xje\"P�\"�\n$M��?O�c���˗gO^�=����ӳ'���ʴ\u000b�\u0015�\u0016�������??|�����7Ͼ�s��^����?��J8]�����/�����~~f��%LL�&D�;�\u0004�\u0017\tp[@2�oG\u001e�@+$�\"\u0001\u000b���\npg\u000e�f�C��()\u000fm����J.\u0007��ij\u0001n�I\u0005�\u0017��\biM�v��L{�#�(93��\u0003\u001c�4\r�6��,�IBm!�1��q�\u0001�\u0010\u0011N4���\u0011!\u0016�\u0011��u٧�\u0014JL5zD�\u000ePk\t\u000f�D�÷h\u0002\f�6�1Tj��\u0010�\bf\u000b7\"�U\u0002x\u0004�\u0016��J�o�LCb�\b\u0012f\u0012{�c[\u0012\u0007s\u0019T\u0016Li\t<\"L�ݐ(ec��y%����};��yR%��G6b\u000f�0��8\u001aƐ�֜(�M�3u$\u0004\u0003tOh�8Q}b�{�(�K��CJ��\u001dC\u000fh\u0014�o�lf&m�&\u0011��bΦ@*�����P~i�[jo����f���\u000e���mKj}З\u001b�e����5�\u0019�GxlC>v����c��\u0017���u����{֢M���g���#ܔ2v���<�\u0012��c�X~�C\u0017\u001f\u001e�x�$v�\u0000\u0015�HB~���_P\u001d\u001fĐ\u0012\u001f��\b�*]G\n�B��ō��\t6K�EX��Z�k\u0012'\u0007@/�]�b\\S���^�\u001ct\f��]�L\u0001^���\"�`U\u0011�\u001a\u0011���D��u�\u0018Ԩ�h�T8ƪ0�\u0011���^�P�T\u0000���:\u0015���}���YM�]�ޠ{�\"_a�+\"��V\u0015al�\u0018B�<��\u001e\fꗺ]+���>��Y=\u001b\u0018�ޡ\u0013\u001f�:��Q\u0000���\f4FA��>Vٹ\n,�>\u000etY�9YR��\bT\\��SE�\t�D\"F\u0013\u001fo����B[��w?\\q\u0003�ë����d:%�n\u0018Y��)]8��}G��F�4�\u0007qx�&l&�C�c���\n\u0018R�/�\u0019Ril�E\u0015����Q��R]<���\u0018ʎb\u001e����\u000b9F\u001e��嬜�\u0012N��:����V��lh ��S��5yCU�^�W{�\r6.�\u0012��\u0010\fi\u001b��:�Қz�\u001a�!0��\u001a�ֶ��w�\u0006˻�1����V�'\u0013��$�#2�\u0019�E��!�$�Z���\u001b����v4���o\u0000\u0000\u0000��PK\u0007\b���{}\u0005\u0000\u0000e\u001c\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\r\u0000\u0000\u0000xl/styles.xml��]��(\u0017���_�|?c�&�Ld�zժR��j�v��\u0012�\u00134|X������+p��qf�8�b�c�\u0003\u001c·I��r\u0006�Di*E���,\u0001D`YQ�/��~|��$\u001f���ڜ\u0018�~ �\u0000`9\u0013�H\u000e�4�4��@8���!�rVKő��R�S�(�*��8K\u0017Y�N9�\"�\b[��@d]SL>K�r\"LG!�\u0010Q��Q�!�P�{��\rŭ6�_A�\u0018b���T쯭\u0013���\u0007�L\u0000Tj.�s'\u000b$ɣ��\u0012%y�\f�QFͩgU{>\u0003UQ�W��\u00106�8L�gR}B��&5t\u000e��ش��\u0010;��#7a�(�5_T�!C��\u0007ڄ%VQA��k��GE��5\u0012G�\u0010�\u0015\u0003�M\u000e�,\n�\u001f}�;��i\n�Q[ϑzn��\u000b_���\u001eA&\u001cN��Z��\u001eK~�HJ,&W�µ����\u0019\n    <oKKC��Z�u}�\r=��!��f�m�kcy$�\t�ɓ����N��\u001b\u0010?��A����T�'$H�5lށ�Ġ\n\u0019�b)\f\u0011�ǩ\t�)̕�\u0013��_��b�Yd�0)�O�����!�5\u0014\u0019/��1��Z3�j*�C��9]d0�,6p\u00197�s\u0012s\u0013{H7�bRr�\u000f��բ�f�Ƌj�e�l��c!����>^L�ƛ�O\u00160{�PX�D�$\u0016?7��\"\u0011�ܣ�߼��\\����\td\u000f�\\V�y,�b�^���U\u001c�Y`�Bx�gp1��\u0010�pdc\u000bW�I~Z#TdҞp��\"G���\u0007�b&k\u0015X�\u0001�a&l\u001d`\u001f\u0006X�'�\u0001[\u000e��\u001e1�V\u0003l}3lxP\u000f7�\u001e\u0006��f�f�=�\f{\u001c`0��\u0006�\u0011\u000eގ�#��0\u0018�Fq\u0000o\u000f\u00048��ؤ�\u0016n\u0014\u000b���\b7D\u0003�\u001b\r�i�]ߐ���\u0019����^H�v�\u0014\t�K�_L\u0000�K�_\n�u_/�5\u0014T�\u0001�|\u0001_���+�3?�Y\u001bX\u0005�Z\u0000�>\u0000����\u0015�j\r�z\u0000Vm�U��9��@wq]���X���w\r�\n\u0001��[��@�c����\u0000��n.�\u0012�G\u0001�\bǑ\u0017�c��Jl��wA�\u001d��\u001c��q8\u0010ʷ�vc�o�ƛ􎬶-������˲\f������Mʼ��h�e+L������/pD�H�\u0013��W�cɤ\u0002�@8�:�^R�\u0002q�u��\u0018�)�9a�׈Sv�\u001e.��\u0013��\u001f��t�ה�0\t��\tʼA�\u0010%�P�����&E\"� \u000e7��`��\u001bսB'�X���o��wRUD]\u0018�\u0013�9#��zwStp��w#�2O�u'����Ӿ�޲�@n�Q���\u001b��1a�91�\u0018��@��\u000b7_�\"�\u0012�l�7)c�f��~�yjk�Q#bǿ\u0019\rl=\u001d#��`\u0017#\u0004)p�Q$�c+\u001b0`�Rf�\bР0n�2��0u��\t�ܸlu9l���Ԩe�\u001e��\u000f�dhs[\u0006ס׏�(���\u0007�h˽��p1\u0011��-�\u000b\u0000\u0000��PK\u0007\b��\t;�\u0004\u0000\u0000�\u0015\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0014\u0000\u0000\u0000xl/sharedStrings.xmlt�MN�0\u0010\u0005�=���w=5����\n���\u0000\u000bz\u0000+����\u0013\n        <NUn��\u0000J�r��f���\u0012<;c�1Ŏ�W�\u0019�>�1\u001e;~x\u0012w|gn4Qa��#u�Tʴ���\u0013\u0006K�4a�\u0004?�\u001cl�U�GISF��X��\n������>ͱt|\r��q��q�\u0003F�ht1o9��^l@-���[�&ϏK�?���s�X��z�l��jg�\u0005\u001d��z8L�dy��Q\u0015�V���EU���\f�\t\u000b�k�̀�W�\u0014�Z����A�\u0005�֛ߊ$*�+\u0000\u0000��PK\u0007\b%mR\u0002�\u0000\u0000\u0000�\u0001\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u001a\u0000\u0000\u0000xl/_rels/workbook.xml.rels�пj�@\u0010����\u0014��?G/!��^\u0013\u0002�&�\u0001\u0016\u001d�����L\u0012��\u0003\u0006�G����e��|��8y�>)����\"�AQhcg�P�{���\u0011����\u0016\u001b\u0003\u001b;���\u000b\\�\u0011\u0019�\u0010�5�5gq�0y���p\u0016Ӏ�n�z <��\u0003�u\u0003ꫦ:u\u0015�SW�jt\u001aH*���̆H\u0018��&�@5�����}o[z�퇧 7\u0004��\u0000�\u0012ט۴�Bc�8�=?�m��\u0005#�<���~���Mt��pr�F'��$�0��u�/�j��;\u0000\u0000��PK\u0007\bq��j�\u0000\u0000\u0000�\u0002\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0011\u0000\u0000\u0000docProps/core.xml��MK\u00031\u0010����%��ɶP4��A�IA��x\u000bɴ\rn>HR7�{��V�M�i�g\u001e�$|QlW}aLƻ9i\u001bJ*t�k�6s�Zַd!n�\nL����\u0007��`���\\b*��6��\u0000�ڢ���\u0001]���G+sj|�@��Sn\u0010&���b�Zf\t{a\u001dF#9*�\u001a�a\u0017�A�\u0015`�\u0016]N�6-�ٌѦ�\u000bCrAZ��\u0003^EO�H�dF�����\u000e��\u0016ޟ\u001e_���ƥ,�B\"�VLE��GQv�p�\u0018�c��\u0000uU�a�.��mz��Z\u0012������lE)\u001b����k�,�^�����$\u0010\u001c����\t\u0000\u0000��PK\u0007\bE�@�\u0010\u0001\u0000\u0000\u001c\u0002\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0010\u0000\u0000\u0000docProps/app.xml��?K\u00041\u0010\u0005��O�����B���\u0010��Z��K2{7�̄�xD?���Y[>\u001e�x�\u001fz��\u0019������\r�Q\u0012�qv�����\u001diR�\u0019�\u000e�d�ٝ��\u001e@�\t˪�T�^�&�����#ȶQ�\u0007��\u0005��f�n\u0001�!'L��\u000b�\u001fq���I��>}[>*�\u000b~\u0011[�B\u0005���\u0012�}���j$\u001c�ex�\u00113}��������\u0015\u0000\u0000��PK\u0007\b�8 \t�\u0000\u0000\u0000 \u0001\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u000b\u0000\u0000\u0000_rels/.rels���J�0\u0010\u0006���)B��t�\u000f\"��^D؛H}��L��$\u0013&�Ʒ\u0017��Ŋ�80|ߏ�x�1�\u0017��1i�oZ) Yt>�Z>�w�ky��\u001d\u001f \u0018����s\u00115�T����R�N\u0010Mi0C�1\fH�pi�F����\b�жW�.3d��\u0014g�%��)zC#��\u000e�=a.����\u0018���2��\u0015��[�E�\u001c!�J��ʐ\u001c�]&�@��\u0003�.E�Ê�\"�6�ϳ�\bl�a󙺙���ՠ^��'�y\u001b����\u001f�e��t�\u0001\u0000\u0000��PK\u0007\b��{��\u0000\u0000\u0000d\u0002\u0000\u0000PK\u0003\u0004\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013\u0000\u0000\u0000[Content_Types].xml���n�0\u0010��\n            <E�+���\u0010�l\u000f�9�J�\u0007�ړĬ��f�!}{��[Qh!����L��O�&�^�)V\u0003\u0010\u0007̍��\u001bUAv�C�\u001a���s�N]�^m�n\np5���Q�Hyo\f�\u001e�e�\u0005�b����F�L��h;0o6���a\u0016�R˔�vۏ���(էQ /\\�Ȫ��,N�F�RbpV\u0002f3d�\u0007��%h�8�p\u001f\n�\u001eST���%<��V\u001e'�\b8��\u001f��5�mp����\u0013�\u0000'�R�\u000e@\u0014\n                <T{K��&h�\u0019��\u001e\u0012,�\u000b�o�\u0007\u001aY�\u001e�u�,z�9\u0015r\u0002>�f���gC�\u0010X�=������\u000e?��\u0007��K[LS'\u001b�:\u0013�nOX��R�V��n<��\u0010\u0016 \tO�c�g3��o�~1w���zqH�t��\u0007;���6��\u0004��P�݋\u001f���\u001b����\u0015\u0000\u0000��PK\u0007\b��g\u0001\u0000\u0000,\u0005\u0000\u0000PK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000%�w\u0018Q\u0001\u0000\u0000(\u0003\u0000\u0000\u0018\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000xl/worksheets/sheet1.xmlPK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u00001\u000b\\]�\u0001\u0000\u0000�\u0002\u0000\u0000\u000f\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000�\u0001\u0000\u0000xl/workbook.xmlPK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000���{}\u0005\u0000\u0000e\u001c\u0000\u0000\u0013\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000d\u0003\u0000\u0000xl/theme/theme1.xmlPK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000��\t;�\u0004\u0000\u0000�\u0015\u0000\u0000\r\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\"\t\u0000\u0000xl/styles.xmlPK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000%mR\u0002�\u0000\u0000\u0000�\u0001\u0000\u0000\u0014\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0011\u000e\u0000\u0000xl/sharedStrings.xmlPK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000q��j�\u0000\u0000\u0000�\u0002\u0000\u0000\u001a\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000@\u000f\u0000\u0000xl/_rels/workbook.xml.relsPK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000E�@�\u0010\u0001\u0000\u0000\u001c\u0002\u0000\u0000\u0011\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000q\u0010\u0000\u0000docProps/core.xmlPK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000�8 \t�\u0000\u0000\u0000 \u0001\u0000\u0000\u0010\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000�\u0011\u0000\u0000docProps/app.xmlPK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000��{��\u0000\u0000\u0000d\u0002\u0000\u0000\u000b\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000�\u0012\u0000\u0000_rels/.relsPK\u0001\u0002\u0014\u0000\u0014\u0000\b\u0000\b\u0000\u0000\u0000\u0000\u0000��g\u0001\u0000\u0000,\u0005\u0000\u0000\u0013\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000�\u0013\u0000\u0000[Content_Types].xmlPK\u0005\u0006\u0000\u0000\u0000\u0000\n\u0000\n\u0000�\u0002\u0000\u0000|\u0015\u0000\u0000\u0000\u0000"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{partner1}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/ping",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "E2e",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

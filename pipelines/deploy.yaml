@@ -1,0 +1,46 @@
+.ssh:
+  image: kroniak/ssh-client:3.19
+  variables:
+    SSH_HOST: "REDACTED"
+    SSH_USER: "ubuntu"
+    SSH_ADDRESS: $SSH_USER@$SSH_HOST
+  before_script:
+    - mkdir -p ~/.ssh && chmod 700 ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config && chmod 600 ~/.ssh/config
+    - echo "$SSH_PRIVATE_KEY_BASE64" | base64 -d > ~/.ssh/id_rsa && chmod 400 ~/.ssh/id_rsa
+    - ssh-agent sh -c "ssh-add ~/.ssh/id_rsa"
+    - ssh-keyscan -H "$SSH_HOST"
+
+
+.deploy:
+  extends: .ssh
+  stage: deploy
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  variables:
+    OPT_DOCKER: ""
+    DOCKERFILE_PATH: Dockerfile
+    IMAGE_TAG: $CI_COMMIT_SHA
+    IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_TLS_VERIFY: 1
+    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+    DOCKER_DRIVER: overlay2
+    DOCKER_COMPOSE_FILE: "backend/docker-compose.yaml"
+    PRUNE_COMMAND: "docker system prune -f -a"
+    CONTAINER_NAME_SUFFIX: ""
+  script:
+    - scp ./migrations/*.sql $SSH_ADDRESS:/home/ubuntu/migrations
+    - docker build -t $CI_PROJECT_NAME -f $DOCKERFILE_PATH .
+    - docker build -t bot -f ./bot/Dockerfile .
+    - docker save $CI_PROJECT_NAME -o $CI_PROJECT_NAME.tar
+    - docker save bot -o bot.tar
+    - scp $CI_PROJECT_NAME.tar $SSH_ADDRESS:$CI_PROJECT_NAME.tar
+    - scp bot.tar $SSH_ADDRESS:bot.tar
+    - scp docker-compose.yaml $SSH_ADDRESS:docker-compose.yml
+    - ssh $SSH_ADDRESS "docker load -i $CI_PROJECT_NAME.tar"
+    - ssh $SSH_ADDRESS "docker load -i bot.tar"
+    - ssh $SSH_ADDRESS "docker compose -f docker-compose.yml up -d"
+

@@ -1,0 +1,997 @@
+basePath: /api/v1
+definitions:
+  handlers.clientSignResponse:
+    properties:
+      id:
+        type: string
+      name:
+        maxLength: 50
+        minLength: 3
+        type: string
+      password:
+        type: string
+      phone_number:
+        type: string
+      token:
+        type: string
+    required:
+    - name
+    - phone_number
+    type: object
+  handlers.partnerSignResponse:
+    properties:
+      description:
+        maxLength: 500
+        minLength: 3
+        type: string
+      id:
+        type: string
+      image_id:
+        type: integer
+      password:
+        type: string
+      phone_number:
+        type: string
+      title:
+        maxLength: 50
+        minLength: 3
+        type: string
+      token:
+        type: string
+    required:
+    - description
+    - image_id
+    - phone_number
+    - title
+    type: object
+  handlers.signInRequest:
+    properties:
+      password:
+        type: string
+      phone_number:
+        type: string
+    required:
+    - password
+    - phone_number
+    type: object
+  models.ActivationRequest:
+    properties:
+      client_id:
+        type: string
+      promo_id:
+        type: string
+    type: object
+  models.Client:
+    properties:
+      id:
+        type: string
+      name:
+        maxLength: 50
+        minLength: 3
+        type: string
+      password:
+        type: string
+      phone_number:
+        type: string
+    required:
+    - name
+    - phone_number
+    type: object
+  models.Condition:
+    properties:
+      buy:
+        type: integer
+      type:
+        enum:
+        - COMMON
+        - UNIQUE
+        - BUNDLE
+        type: string
+    type: object
+  models.ErrorResponse:
+    description: 'Структура ошибки, возвращаемая API в формате { "error": "message"
+      }'
+    properties:
+      error:
+        example: Сообщение об ошибке
+        type: string
+    type: object
+  models.ModerationBody:
+    properties:
+      partner_id:
+        type: string
+      promo_id:
+        type: string
+      verdict:
+        type: boolean
+    type: object
+  models.Partner:
+    properties:
+      description:
+        maxLength: 500
+        minLength: 3
+        type: string
+      id:
+        type: string
+      image_id:
+        type: integer
+      password:
+        type: string
+      phone_number:
+        type: string
+      title:
+        maxLength: 50
+        minLength: 3
+        type: string
+    required:
+    - description
+    - image_id
+    - phone_number
+    - title
+    type: object
+  models.Promo:
+    properties:
+      condition:
+        $ref: '#/definitions/models.Condition'
+      condition_string:
+        description: ✅ ИСПРАВЛЕНО ЗДЕСЬ!
+        type: string
+      description:
+        type: string
+      image_id:
+        type: integer
+      is_active:
+        type: boolean
+      is_approved:
+        type: boolean
+      partner_id:
+        type: string
+      promo_id:
+        type: string
+      time_limit_end:
+        type: integer
+      time_limit_start:
+        type: integer
+      title:
+        type: string
+      usage_limit:
+        type: integer
+    required:
+    - condition
+    - image_id
+    type: object
+  models.PromoCLientView:
+    properties:
+      buy:
+        type: integer
+      condition:
+        $ref: '#/definitions/models.Condition'
+      condition_string:
+        description: ✅ ИСПРАВЛЕНО ЗДЕСЬ!
+        type: string
+      created_at:
+        type: string
+      current:
+        type: integer
+      description:
+        type: string
+      image_id:
+        type: integer
+      is_active:
+        type: boolean
+      is_approved:
+        type: boolean
+      overall:
+        type: integer
+      partner_id:
+        type: string
+      promo_id:
+        type: string
+      time_limit_end:
+        type: integer
+      time_limit_start:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+      usage_limit:
+        type: integer
+    required:
+    - condition
+    - image_id
+    type: object
+  models.Stat:
+    description: Структура, содержащая основные бизнес-метрики использования промо-кодов.
+    properties:
+      active_promos_count:
+        description: |-
+          Количество активных промо-акций, которые в данный момент доступны клиентам.
+          Промо-акция считается активной, если у нее `is_active = true`.
+        example: 5
+        type: integer
+      active_users_count:
+        description: |-
+          Количество уникальных пользователей, которые использовали промо-коды.
+          Каждый клиент считается только один раз, независимо от количества активаций.
+        example: 85
+        type: integer
+      buy_promos_count:
+        description: |-
+          Общее количество покупок, совершенных с использованием промо-кодов.
+          Считается суммарное количество активаций промо, приведших к покупке.
+        example: 120
+        type: integer
+      conversion_rate:
+        description: |-
+          Конверсия пользователей в использование промо-кодов (в процентах).
+          Рассчитывается как `(ActiveUsers / TotalClients) * 100`.
+        example: 17
+        type: number
+      daily_active_users_count:
+        description: |-
+          Количество уникальных пользователей, активировавших промо-коды за последние 24 часа.
+          Показывает ежедневную вовлеченность клиентов в акции.
+        example: 25
+        type: integer
+      daily_buy_promo_count:
+        description: |-
+          Количество покупок, совершенных с промо-кодами за последние 24 часа.
+          Полезно для оценки текущей активности пользователей.
+        example: 30
+        type: integer
+      limit_promos_count:
+        description: |-
+          Количество промо-акций, достигших лимита использования.
+          Например, если промо-код имеет ограничение `usage_limit = 100`, то он больше не учитывается после достижения лимита.
+        example: 10
+        type: integer
+      retention_30d:
+        description: |-
+          Количество клиентов, которые использовали промо-коды повторно в последние 30 дней.
+          Этот показатель помогает измерить уровень удержания клиентов.
+        example: 40
+        type: integer
+      top_users:
+        description: |-
+          Количество топ-клиентов, которые использовали промо-коды чаще всего.
+          Этот показатель можно использовать для определения лояльных клиентов.
+        example: 10
+        type: integer
+      total_users:
+        description: |-
+          Общее количество зарегистрированных клиентов у партнера.
+          Полезно для оценки охвата бизнеса и анализа конверсии в использование промо-кодов.
+        example: 500
+        type: integer
+    type: object
+  models.StatPromo:
+    properties:
+      buy_promos_count:
+        type: integer
+      daily_buy_promo_count:
+        type: integer
+      daily_users_count:
+        type: integer
+      users_count:
+        type: integer
+    type: object
+  utils.Err:
+    properties:
+      message:
+        type: string
+    type: object
+host: prod-team-29-4254c2ee.REDACTED
+info:
+  contact: {}
+  description: T-Loyal API
+  title: Crazy Peppers T-Loyal API
+  version: "1.0"
+paths:
+  /clients/auth/sign-in:
+    post:
+      consumes:
+      - application/json
+      description: sign-in in client with given data
+      parameters:
+      - description: Credentials to use
+        in: body
+        name: client
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.signInRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.clientSignResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.Err'
+      summary: Sign-in for client
+      tags:
+      - Clients
+  /clients/auth/sign-up:
+    post:
+      consumes:
+      - application/json
+      description: create client with given data
+      parameters:
+      - description: Credentials to use
+        in: body
+        name: client
+        required: true
+        schema:
+          $ref: '#/definitions/models.Client'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/handlers.clientSignResponse'
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Create client
+      tags:
+      - Clients
+  /moderation:
+    get:
+      description: Get list for moderation
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Promo'
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.Err'
+      summary: Get not approved endpoint
+      tags:
+      - Moderation
+    post:
+      description: Change moderation status for promo
+      parameters:
+      - description: Verdict of moderator
+        in: body
+        name: Verdict
+        required: true
+        schema:
+          $ref: '#/definitions/models.ModerationBody'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.Err'
+      summary: Moderate promo
+      tags:
+      - Moderation
+  /partners:
+    get:
+      description: Returning list of partners for client
+      parameters:
+      - description: Page pagination
+        in: query
+        name: page
+        type: integer
+      - description: Authorization header must be set for access
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Partner'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.Err'
+      summary: Partners endpoint
+      tags:
+      - Partners
+  /partners/{partnerID}/promos:
+    get:
+      description: Returning list of promos of specific partner for client
+      parameters:
+      - description: Partner ID
+        in: path
+        name: partnerID
+        required: true
+        type: string
+      - description: Authorization header must be set for access
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Promo'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.Err'
+      summary: Promo endpoint
+      tags:
+      - PromosForClient
+  /partners/{partnerID}/promos/{promoID}:
+    get:
+      description: Returning promo for client
+      parameters:
+      - description: Partner ID
+        in: path
+        name: partnerID
+        required: true
+        type: string
+      - description: Partner ID
+        in: path
+        name: promoID
+        required: true
+        type: string
+      - description: Authorization header must be set for access
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Promo'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.Err'
+      summary: Promo endpoint
+      tags:
+      - PromosForClient
+  /partners/{partnerID}/promos/{promoID}/img:
+    get:
+      description: Returns the image associated with a specific promo
+      parameters:
+      - description: Partner ID
+        in: path
+        name: partnerID
+        required: true
+        type: string
+      - description: Promo ID
+        in: path
+        name: promoID
+        required: true
+        type: string
+      - description: Authorization header must be set for access
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        "200":
+          description: Image file data
+          schema:
+            type: file
+        "400":
+          description: 'error: Bad request'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: 'error: Unauthorized'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: 'error: Изображение не найдено'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get promo image
+      tags:
+      - PromosForClient
+  /partners/{partnerID}/stat:
+    get:
+      consumes:
+      - application/json
+      description: Возвращает метрики использования промо-кодов, такие как активные
+        пользователи, количество покупок, retention и т. д.
+      parameters:
+      - description: UUID партнера
+        in: path
+        name: partnerID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Успешный ответ со статистикой
+          schema:
+            $ref: '#/definitions/models.Stat'
+        "400":
+          description: "Ошибка валидации данных. Пример: {\\\"error\\\": \\\"Некорректный\tUUID\tпартнера\\\"}"
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "401":
+          description: "Ошибка авторизации. Пример: {\\\"error\\\": \\\"Некорректный\t\t\tтокен\tили\t\t\tпользователь\tне\tаутентифицирован\\\"}"
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "403":
+          description: "Ошибка доступа. Пример: {\\\"error\\\": \\\"Недостаточно\t\t\t\tправ\tдля\t\t\tпросмотра\t\tстатистики\\\"}"
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: "Внутренняя ошибка сервера. Пример: {\\\"error\\\": \\\"Ошибка\t\tпри\t\tполучении\tстатистики\\\"}"
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Получение статистики по промо-акциям
+      tags:
+      - Statistics
+  /partners/{partnerID}/stat/{promoID}:
+    get:
+      description: Stats for partner for specific promo
+      parameters:
+      - description: Partner ID
+        in: path
+        name: partnerID
+        required: true
+        type: string
+      - description: Promo ID
+        in: path
+        name: promoID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.StatPromo'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.Err'
+      summary: Stats endpoint
+      tags:
+      - Stats
+  /partners/{partnerID}/stat/export:
+    get:
+      consumes:
+      - application/json
+      description: Генерирует Excel-файл с активациями промокодов партнера
+      parameters:
+      - description: UUID партнера
+        in: path
+        name: partnerID
+        required: true
+        type: string
+      produces:
+      - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: file
+        "400":
+          description: Некорректный UUID
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "401":
+          description: Неавторизован
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "403":
+          description: Доступ запрещен
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "500":
+          description: Ошибка сервера
+          schema:
+            $ref: '#/definitions/utils.Err'
+      security:
+      - BearerAuth: []
+      summary: Экспорт статистики партнера
+      tags:
+      - Statistics
+  /partners/auth/sign-in:
+    post:
+      consumes:
+      - application/json
+      description: sign-in in partners with given data
+      parameters:
+      - description: Credentials to use
+        in: body
+        name: partner
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.signInRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.partnerSignResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.Err'
+      summary: Sign-in for partners
+      tags:
+      - Partners
+  /partners/auth/sign-up:
+    post:
+      consumes:
+      - application/json
+      description: sign-up partner with given data
+      parameters:
+      - description: Credentials to use
+        in: body
+        name: partner
+        required: true
+        schema:
+          $ref: '#/definitions/models.Partner'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/handlers.partnerSignResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.Err'
+      summary: Sign-up partner
+      tags:
+      - Partners
+  /ping:
+    get:
+      description: Returns a pong response to indicate the service is up and running
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: pong
+          schema:
+            type: string
+      summary: Ping endpoint
+      tags:
+      - health
+  /promos:
+    get:
+      description: Get promo by partner
+      parameters:
+      - description: Authorization header must be set for access
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Promo'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/utils.Err'
+      summary: Promo endpoint
+      tags:
+      - PromosForPartners
+    post:
+      description: Create promo
+      parameters:
+      - description: Promo
+        in: body
+        name: promo
+        required: true
+        schema:
+          $ref: '#/definitions/models.Promo'
+      - description: Authorization header must be set for access
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Promo'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.Err'
+      summary: Promo endpoint
+      tags:
+      - PromosForPartners
+  /promos/{promoID}:
+    delete:
+      description: Delete promo
+      parameters:
+      - description: Promo ID
+        in: path
+        name: promoID
+        required: true
+        type: string
+      - description: Authorization header must be set for access
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.Err'
+      summary: Promo endpoint
+      tags:
+      - PromosForPartners
+    get:
+      description: Get promo by partner
+      parameters:
+      - description: Promo ID
+        in: path
+        name: promoID
+        required: true
+        type: string
+      - description: Authorization header must be set for access
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Promo'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/utils.Err'
+      summary: Promo endpoint
+      tags:
+      - PromosForPartners
+  /promos/{promoID}/{clientID}:
+    get:
+      description: Get promo by partner
+      parameters:
+      - description: Promo ID
+        in: path
+        name: promoID
+        required: true
+        type: string
+      - description: Client ID
+        in: path
+        name: clientID
+        required: true
+        type: string
+      - description: Authorization header must be set for access
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.PromoCLientView'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/utils.Err'
+      summary: Promo endpoint
+      tags:
+      - PromosForPartners
+  /promos/{promoID}/img/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Allows partners to upload an image for a specific promo
+      parameters:
+      - description: Promo ID
+        in: path
+        name: promoID
+        required: true
+        type: string
+      - description: Image file to upload
+        in: formData
+        name: file
+        required: true
+        type: file
+      - description: Authorization header must be set for access
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'message: Файл успешно загружен'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: 'error: Файл обязателен'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: 'error: Unauthorized'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: 'error: Внутренняя ошибка сервера'
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Upload promo image
+      tags:
+      - PromosForPartners
+  /promos/activate:
+    post:
+      description: Activate promo for client
+      parameters:
+      - description: Activation Request
+        in: body
+        name: promo
+        required: true
+        schema:
+          $ref: '#/definitions/models.ActivationRequest'
+      - description: Authorization header must be set for access
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Promo'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Err'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.Err'
+      summary: Promo endpoint
+      tags:
+      - PromosForPartners
+produces:
+- application/json
+schemes:
+- http
+- https
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
